@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+Allow: /categories/
+
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /lib/
+Disallow: /tags/
+Disallow: /BingSiteAuth.xml
+
+Sitemap: https://sourcelizi.github.io/sitemap.xml
