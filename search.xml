@@ -212,6 +212,7 @@
 <p><img src="/images/imu/v_acc.png"></p>
 <p>当然根据实际测量出的加速度的值与当前姿态的对应的重力加速度的值矢量相减，可以得到线加速度的估计。</p>
 <p>需要指出的一点是，论文里面还提供了IMU角速度计的零偏估计，实际上是一个过程噪声Q矩阵极小的Kalman滤波，但是在高运动的场合下这种估计方法不可靠。</p>
+<p>类似的思路在<a href="https://zhuanlan.zhihu.com/p/350962451">知乎专栏 - 从全状态观测器到卡尔曼滤波器（五）姿态解算中的应用与代码</a>一文中提到过，当然我们也可以直接以为状态量四元数进行估计，省去在Kalman滤波器外对Yaw轴的积分</p>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="零偏估计"><a href="#零偏估计" class="headerlink" title="零偏估计"></a>零偏估计</h3><p>实际上如果运行上面两种算法解算都会遇到一个问题，融合算法并不能修正Yaw轴角速度计积分带来的误差，Yaw轴几乎无例外地在静止条件下会不断漂移。</p>
 <p>为了解决零偏带来的误差，通常会在算法里加入静止检测。当角速度计输出值极小并保持一段时间后可以认为IMU处于静止状态，并将静止条件下角速度计输出值经过滤波处理后得到稳定的偏置值，在下轮的算法中将角速度计测量值减去该偏置作为输入。</p>
 <p>当然理论上用这种办法并不一定可以将零偏与实际测量分开来，因为实际测量的情况下也是可以有零偏大小的运动存在，但是对于零偏已经很小的IMU而言这种解决方法却是行之有效的</p>
@@ -220,6 +221,7 @@
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://zhuanlan.zhihu.com/p/350959758">知乎专栏 - 卡尔曼滤波器与姿态估计问题的碰撞—常规的实现</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/342703388">知乎专栏 - Mahony姿态解算算法笔记（一）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/350962451">知乎专栏 - 从全状态观测器到卡尔曼滤波器（五）姿态解算中的应用与代码</a></li>
 <li><a href="https://blog.csdn.net/qq_21842557/article/details/51727674">CSDN - Pixhawk之姿态解算篇（5）_ECF/EKF/GD介绍</a></li>
 <li><a href="https://dcm.nephen.cn/">Direction Cosine Matrix IMU: Theory中文翻译</a></li>
 <li><a href="https://x-io.co.uk/open-source-imu-and-ahrs-algorithms/">Open source IMU and AHRS algorithms(Mahony Algorithm)</a></li>
