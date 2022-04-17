@@ -1447,4 +1447,91 @@ var-&gt;+-----------------+
         <tag>RoboMaster</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Robomaster开发板C型IMU驱动踩坑记录</title>
+    <url>/202204/bmi088-drv-setup/</url>
+    <content><![CDATA[<p>原本C板官方例程里已经带了用SPI读取BMI088的例程项目，但是细看数据手册后发现许多代码其实真的只是勉强能用，不论是速度还是代码风格都让我不太满意，故重新移植BMI088官方给出的驱动库。在折腾了一番之后，只能说BMI088性能上是个好东西，但是开发体验非常不好。</p>
+<h2 id="移植过程"><a href="#移植过程" class="headerlink" title="移植过程"></a>移植过程</h2><p>按照项目下的README给出的指引，实际上我们只是需要编写读写SPI的函数与微秒延时函数即可。延时可以直接用Systick当计数器完成，而SPI通信的移植实际上比较复杂</p>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>intf_ptr_accel</em></td>
+<td>Interface pointer that can hold Accel device address</td>
+</tr>
+<tr>
+<td><em>intf_ptr_gyro</em></td>
+<td>Interface pointer that can hold Gyro device address</td>
+</tr>
+<tr>
+<td><em>intf</em></td>
+<td>I2C or SPI</td>
+</tr>
+<tr>
+<td><em>read</em></td>
+<td>read through I2C&#x2F;SPI interface</td>
+</tr>
+<tr>
+<td><em>write</em></td>
+<td>write through I2C&#x2F;SPI interface</td>
+</tr>
+<tr>
+<td><em>delay_us</em></td>
+<td>delay in microseconds</td>
+</tr>
+<tr>
+<td><em>variant</em></td>
+<td>BMI085_VARIANT</td>
+</tr>
+</tbody></table>
+<h3 id="SPI通信"><a href="#SPI通信" class="headerlink" title="SPI通信"></a>SPI通信</h3><p>首先是硬件SPI通信速率大小的问题。C板参考例程内CubeMX的SPI速率配置为300k左右，这个速率实际上太慢了。按照每次只读取6个字节（三轴加速度计与三轴角速度计16bit，当然实际肯定比这个更多）共48bit来算，就有至少0.2ms的时间耗费在SPI通信上。</p>
+<p>实际上在数据手册上给出的SPI参数里，提到最大速率可以去到10Mhz。在另外一本<a href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/application_notes_1/bst-mis-an006.pdf">Application Note</a>内提到推荐2Mhz以上的通信速率。最终我的SPI速率被配置为2.625Mbps</p>
+<p><img src="/images/bmi088-drv/spi-speed.png"></p>
+<p>软件方面，SPI读写如果使用HAL库函数进行一次传输速度慢于直接用寄存器完成，对于实时性极强的IMU应该使用后者</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">uint8_t</span> <span class="title function_">spi_rw_byte</span><span class="params">(<span class="type">uint8_t</span> byte)</span>&#123;</span><br><span class="line">	SET_BIT(BMI088_SPI-&gt;CR1, SPI_CR1_SPE);</span><br><span class="line">    <span class="keyword">while</span>((BMI088_SPI-&gt;SR &amp; SPI_SR_TXE) == RESET);</span><br><span class="line">	BMI088_SPI-&gt;DR = byte;</span><br><span class="line">    <span class="keyword">while</span>((BMI088_SPI-&gt;SR &amp; SPI_SR_RXNE) == RESET);</span><br><span class="line">    <span class="keyword">return</span> BMI088_SPI-&gt;DR;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>IMU加速度计与角速度计在同一个SPI总线上通过不同CS引脚选中，对应到BMI088官方库的移植函数则是通过传入的<code>intf_ptr</code>指明，其值是初始化中的<code>intf_ptr_accel</code>或<code>intf_ptr_gyro</code>，这里只需要判断传入参数拉低对应的片选脚即可</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">BMI08X_INTF_RET_TYPE <span class="title function_">bmi08x_spi_read</span><span class="params">(<span class="type">uint8_t</span> reg_addr, <span class="type">uint8_t</span> *reg_data, <span class="type">uint32_t</span> len, <span class="type">void</span> *intf_ptr)</span>;</span><br><span class="line">BMI08X_INTF_RET_TYPE <span class="title function_">bmi08x_spi_write</span><span class="params">(<span class="type">uint8_t</span> reg_addr, <span class="type">const</span> <span class="type">uint8_t</span> *reg_data, <span class="type">uint32_t</span> len, <span class="type">void</span> *intf_ptr)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>另外一个SPI通信中比较特殊的问题是，在每次与<strong>加速度计</strong>通信时不论是读单个寄存器还是连续读都需要先接收一个Dummy Byte，这个东西实际上是没有意义的内容。我不知道C板例程怎么处理这个问题的，但是看BMI088官方的驱动倒是处理得比较好</p>
+<p><img src="/images/bmi088-drv/spi-comm.png"></p>
+<h3 id="初始化流程"><a href="#初始化流程" class="headerlink" title="初始化流程"></a>初始化流程</h3><p>这部分是最麻烦，首先IMU作为MEMS器件在上电之后需要静置稳定，不论是等待加速度计的数据稳定还是角速度计元件的起振，并且BMI088没有任何办法告诉主机它是否已经完全就绪。</p>
+<p>其次IMU内部也有电源管理，其数字接口与模拟部分可以分别供电。其电源模式主要可以分为Suspend Mode和Normal Mode，电源模式之间的切换也需要等待稳定。从寄存器的初始值来看，BMI088经过上电复位后加速度计是处于Suspend Mode，而角速度计是处于Normal Mode</p>
+<p>总之按照数据手册上的指引，BMI088的初始化的等待至少有</p>
+<ul>
+<li><p>加速度计上电等待1ms，切换电源模式进入Normal Mode后等待50ms(也可能是5ms？数据手册前后指引不相同)</p>
+</li>
+<li><p>角速度计上电或切换电源模式都需要等待30ms</p>
+</li>
+<li><p>SPI两次写入间至少需要有2us（我是在某次加速度计初始化失败的时候发现这个问题）</p>
+<p><img src="/images/bmi088-drv/spi-idle.png"></p>
+</li>
+</ul>
+<p>也就是说一个完整的初始化流程应该是这样的</p>
+<ul>
+<li>上电复位，等待30ms至IMU完全就绪（如果不是上电复位可忽略）</li>
+<li>分别切换角速度计和加速度计的电源模式，每次切换等待30ms或50ms</li>
+<li>写入输出速率，量程大小等配置，每次写入需要确保间隔2us以上（写间隔可在移植的SPI读写函数内完成）</li>
+<li>等待数据采集</li>
+</ul>
+<p>另外Bosch BMI088的官方驱动做的神奇操作是，它在初始化程序里给BM088上传一个类似固件一样的东西，通过调用<code>bmi08a_load_config_file</code>函数，但是实际上在<a href="https://community.bosch-sensortec.com/t5/MEMS-sensors-forum/BMI08x-config-file-loading-when-not-using-data-sync-mandatory-or/td-p/52243">Bosch论坛答疑的一个帖子</a>指出，这个东西没什么用处除非你要使用数据同步的特性（这个功能C板没戏，硬件连线都没有引出来），所以上传固件根本没有必要，甚至有时候会因为上传失败导致初始化出问题的也不在少数。</p>
+<p>而且不得不说在各种电源模式下读写寄存器的时序连官方自己都会搞混。在移植驱动的过程中官方的仓库还更新了，内容是修复写固件过程中的Bug，大概就是两次写寄存器需要等待时间的问题（并且两种模式下等待的时间还不尽相同！）</p>
+<p><img src="/images/bmi088-drv/bug.png"></p>
+<p>最后，目前移植出到C板上的代码仓库在<a href="https://github.com/SourceLizi/RoboMaster-Borard-C-BMI088">这里</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/RoboMaster/DevelopmentBoard-Examples">C板官方例程</a></p>
+<p><a href="https://github.com/BoschSensortec">BoschSensortec</a>&#x2F;<a href="https://github.com/BoschSensortec/BMI08x-Sensor-API">BMI08x-Sensor-API</a>  </p>
+<p><a href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmi088-ds001.pdf">BMI088 DataSheet</a></p>
+]]></content>
+      <categories>
+        <category>Embedded</category>
+      </categories>
+      <tags>
+        <tag>STM32</tag>
+        <tag>Robomaster</tag>
+      </tags>
+  </entry>
 </search>
