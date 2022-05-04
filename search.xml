@@ -218,6 +218,12 @@
 <p>当然理论上用这种办法并不一定可以将零偏与实际测量分开来，因为实际测量的情况下也是可以有零偏大小的运动存在，但是对于零偏已经很小的IMU而言这种解决方法却是行之有效的</p>
 <h3 id="高运动检测"><a href="#高运动检测" class="headerlink" title="高运动检测"></a>高运动检测</h3><p>当前IMU采用的Kalman估计几乎无一例外地考虑非重力加速度的影响，这一点应该是针对Mahony算法而言。Mahony算法对于任何加速度输入都一视同仁，都只取方向而不关心其加速度大小是否合理。</p>
 <p>可行的解决方案是在检测到高运动的场合时，仅仅依靠角速度计积分获得姿态，或者根据加速度大小动态调节Kp与Ki</p>
+<h3 id="商用算法"><a href="#商用算法" class="headerlink" title="商用算法"></a>商用算法</h3><p>一般这一类算法可以自己编写并且调参以取得更好的性能，但是现在也不乏有些公开的商用算法库可用，它们一般是已经编译完成的二进制链接库，下面列举一些我认为比较好用的库</p>
+<ul>
+<li><a href="https://www.st.com/en/embedded-software/x-cube-mems1.html">ST的MEMS算法库</a>：MotionFX库中有针对六轴/九轴的算法，可免费使用</li>
+<li><a href="https://www.bosch-sensortec.com/software-tools/software/sensor-fusion-software/#bsxlite">Bosch的BSXLite库</a>：功能最完善但是参数私有，仅提供BMI160等参数输入试用，完整版参数需要付费</li>
+<li>Invensense的motion_driver库：MPU6050专用的库，内部包含校准以及各种姿态解算</li>
+</ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://zhuanlan.zhihu.com/p/350959758">知乎专栏 - 卡尔曼滤波器与姿态估计问题的碰撞—常规的实现</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/342703388">知乎专栏 - Mahony姿态解算算法笔记（一）</a></li>
