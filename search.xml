@@ -1986,6 +1986,8 @@ var-&gt;+-----------------+
 <p><img src="/images/circuit-sim/simulink-tune1.png"></p>
 <p>在弹出来的窗口中配置参数，参考文章中的参数说明，配置稳态起始时间，扫频持续时间（100/带宽），阶跃与正弦幅度，最后再配置控制系统的带宽以及相位裕度指标，按下Tune。之后Simulink会自动仿真得到一个参数，这个参数可通过点击Update PID Block按钮导出到PID模块中</p>
 <p><img src="/images/circuit-sim/simulink-tune2.png"></p>
+<p>文中涉及的仿真源文件下载</p>
+<p>LTSpice <a href="/files/sallen-key.asc">sallen-key.asc</a><br>Simulink <a href="/files/buck_example.slx">buck_example.slx</a></p>
 ]]></content>
       <categories>
         <category>Hardware</category>
