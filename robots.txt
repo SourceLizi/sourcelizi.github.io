@@ -7,6 +7,7 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /lib/
 Disallow: /tags/
+Disallow: /files/
 Disallow: /BingSiteAuth.xml
 
 Sitemap: https://sourcelizi.github.io/sitemap.xml
