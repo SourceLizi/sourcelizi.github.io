@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sourcelizi.github.io/202404/mini-ubuntu-inst/</loc>
+    
+    <lastmod>2024-04-27</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://sourcelizi.github.io/202404/opt-algo/</loc>
+    
+    <lastmod>2024-04-10</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://sourcelizi.github.io/202403/lie4robotic/</loc>
     
     <lastmod>2024-03-21</lastmod>
@@ -508,7 +526,7 @@
 
   <url>
     <loc>https://sourcelizi.github.io/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -516,161 +534,161 @@
   
   <url>
     <loc>https://sourcelizi.github.io/tags/STM32/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Algorithm/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/How-to-solve/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Briefing/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Android/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Reverse/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/RoboMaster/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/CAN/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Debug/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Matlab/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Motors/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/PCB/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Automatic-Control/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Linux/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/PWN/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Windows/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/RTOS/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/C/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/git/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Busybox/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Power/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Guide/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/tags/Numerical-Algorithms/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -679,70 +697,77 @@
   
   <url>
     <loc>https://sourcelizi.github.io/categories/Embedded/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/categories/CTF/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/categories/Inertial-Measurement/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/categories/Hardware/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/categories/Hardware/HDL/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/categories/Signal-Processing/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/categories/Opinion/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/categories/Theory/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/categories/Software/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://sourcelizi.github.io/categories/Math/</loc>
-    <lastmod>2024-03-31</lastmod>
+    <lastmod>2024-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://sourcelizi.github.io/categories/OS/</loc>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
